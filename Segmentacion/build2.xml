@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Segmentacion" default="main">
+	<target name="init">
+		<tstamp />
+		<property name="name" value="Prueba de Ant" />
+			<property name="version" value="1.0.0" />
+	</target>
+
+	<target name="main" depends="init, compila, empaqueta" description="Compila y empaqueta">
+		<echo message="Compilando y creando el archivo .jar" />
+	</target>
+	
+	<target name="compila" description="Compila">
+		<javac srcdir="src" destdir="bin" />
+	</target>
+
+	<target name="empaqueta" depends="init" description="Empaqueta">
+		<jar jarfile="segmentacionv1.jar" basedir="bin" index="no" compress="yes">
+			<manifest>
+				<attribute name="Built-By" value="${user.name}" />
+				<attribute name="Specification-Title" value="${name}" />
+				<attribute name="Specification-Version" value="${version}" />
+				<attribute name="Main-Class" value="MostrarImagen" />
+			</manifest>
+			
+			<zipfileset src="libs/opencv-320.jar" excludes="META-INF/*" />
+			<zipfileset src="libs/opencv_320.jar" excludes="META-INF/*" />
+		</jar>
+	</target>
+</project>
